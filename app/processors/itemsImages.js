@@ -60,7 +60,7 @@ module.exports = {
       const nameGacha = item?.images?.namegacha;
 
       if (nameGacha) {
-        const image = await cloudinaryManager.getGacha()
+        const image = await cloudinaryManager.getGacha(nameGacha)
           .catch((e) => log.writingError(imagePath, e.message));
 
         if (image) {
