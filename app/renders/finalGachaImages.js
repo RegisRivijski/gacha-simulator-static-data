@@ -28,7 +28,12 @@ module.exports = {
         resultLanguage: langCode,
       });
 
-      if (BLOCKED_CHARACTERS_OBJ_KEYS.indexOf(character.objKey) !== -1) {
+      const characterEng = genshindb.characters(name, {
+        matchCategories: true,
+        resultLanguage: 'en',
+      });
+
+      if (BLOCKED_CHARACTERS_OBJ_KEYS.indexOf(characterEng.name) !== -1) {
         // eslint-disable-next-line no-continue
         continue;
       }
@@ -53,7 +58,7 @@ module.exports = {
       });
 
       let elementIconPath;
-      switch (character.elementKey) {
+      switch (characterEng.element) {
         case 'Anemo':
           elementIconPath = 'Element_Anemo.png';
           break;
@@ -79,7 +84,7 @@ module.exports = {
           break;
       }
 
-      const resizedSplash = await sharp(`./staticData/assets/img/items/gachaSplashCharacters/${character.objKey}.png`)
+      const resizedSplash = await sharp(`./staticData/assets/img/items/gachaSplashCharacters/${characterEng.name}.png`)
         .resize(1920, 1080)
         .toBuffer();
 
@@ -138,7 +143,12 @@ module.exports = {
         resultLanguage: langCode,
       });
 
-      if (BLOCKED_WEAPONS_OBJ_KEYS.indexOf(weapon.objKey) !== -1) {
+      const weaponEng = genshindb.weapons(name, {
+        matchCategories: true,
+        resultLanguage: 'en',
+      });
+
+      if (BLOCKED_WEAPONS_OBJ_KEYS.indexOf(weaponEng.name) !== -1) {
         // eslint-disable-next-line no-continue
         continue;
       }
@@ -193,7 +203,7 @@ module.exports = {
         .resize(128, 128)
         .toBuffer();
 
-      const resizedSplash = await sharp(`./staticData/assets/img/items/gachaWeapons/${weapon.objKey}.png`)
+      const resizedSplash = await sharp(`./staticData/assets/img/items/gachaWeapons/${weaponEng.name}.png`)
         .toBuffer();
 
       const resizedRarityStar = await sharp('./staticData/assets/img/rarityStar.png')
