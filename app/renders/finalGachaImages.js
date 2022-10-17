@@ -172,7 +172,7 @@ module.exports = {
 
       let bgClassPath;
       let iconClassPath;
-      switch (weapon.weapontypeKey) {
+      switch (weaponEng.weapontype) {
         case 'Claymore':
           bgClassPath = 'bg-claymore.png';
           iconClassPath = 'Icon_Claymore.png';
