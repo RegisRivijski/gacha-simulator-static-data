@@ -6,18 +6,18 @@ const log = require('../helpers/logHelper');
 
 const LangCodes = config.language;
 
+const characters = genshindb.characters('names', {
+  matchCategories: true,
+  resultLanguage: 'en',
+});
+
+const weapons = genshindb.weapons('names', {
+  matchCategories: true,
+  resultLanguage: 'en',
+});
+
 module.exports = {
   generate() {
-    const characters = genshindb.characters('names', {
-      matchCategories: true,
-      resultLanguage: 'en',
-    });
-
-    const weapons = genshindb.weapons('names', {
-      matchCategories: true,
-      resultLanguage: 'en',
-    });
-
     const charactersData = {};
     const weaponsData = {};
     // eslint-disable-next-line guard-for-in
@@ -70,7 +70,5 @@ module.exports = {
       log.writing(weaponsPath);
       fs.writeFileSync(weaponsPath, JSON.stringify(weaponsData[code], null, 2));
     }
-
-    console.info('Done!');
   },
 };

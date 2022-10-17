@@ -16,9 +16,14 @@ const weapons = genshindb.weapons('names', {
 
 module.exports = {
   async generate() {
-    for await (const item of characters) {
-      const splashImagePath = `./staticData/assets/img/items/gachaSplashCharacters/${item.objKey}.png`;
-      const sliceImagePath = `./staticData/assets/img/items/gachaSliceCharacters/${item.objKey}.png`;
+    for await (const name of characters) {
+      const item = genshindb.characters(name, {
+        matchCategories: true,
+        resultLanguage: 'en',
+      });
+
+      const splashImagePath = `./staticData/assets/img/items/gachaSplashCharacters/${item.name}.png`;
+      const sliceImagePath = `./staticData/assets/img/items/gachaSliceCharacters/${item.name}.png`;
 
       const nameGachaSplash = item?.images?.namegachasplash;
       const nameGachaSlice = item?.images?.namegachaslice;
@@ -44,8 +49,13 @@ module.exports = {
       }
     }
 
-    for await (const item of weapons) {
-      const imagePath = `./staticData/assets/img/items/gachaWeapons/${item.objKey}.png`;
+    for await (const name of weapons) {
+      const item = genshindb.weapons(name, {
+        matchCategories: true,
+        resultLanguage: 'en',
+      });
+
+      const imagePath = `./staticData/assets/img/items/gachaWeapons/${item.name}.png`;
 
       const nameGacha = item?.images?.namegacha;
 

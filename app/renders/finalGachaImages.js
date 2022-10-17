@@ -21,14 +21,19 @@ const weapons = genshindb.weapons('names', {
 });
 
 module.exports = {
-  async renderCharacters(path, font) {
-    for await (const character of characters) {
+  async renderCharacters(path, font, langCode) {
+    for await (const name of characters) {
+      const character = genshindb.characters(name, {
+        matchCategories: true,
+        resultLanguage: langCode,
+      });
+
       if (BLOCKED_CHARACTERS_OBJ_KEYS.indexOf(character.objKey) !== -1) {
         // eslint-disable-next-line no-continue
         continue;
       }
 
-      const renderedImagePath = `./staticData/assets/img/${path}/${character.objKey}.png`;
+      const renderedImagePath = `./staticData/assets/img/${path}/${name}.png`;
 
       const text = text2png(character.name.length > 10 ? character.name.replace(' ', '\n') : character.name, {
         font: '75px TrueType',
@@ -126,14 +131,19 @@ module.exports = {
     }
   },
 
-  async renderWeapons(path, font) {
-    for await (const weapon of weapons) {
+  async renderWeapons(path, font, langCode) {
+    for await (const name of weapons) {
+      const weapon = genshindb.weapons(name, {
+        matchCategories: true,
+        resultLanguage: langCode,
+      });
+
       if (BLOCKED_WEAPONS_OBJ_KEYS.indexOf(weapon.objKey) !== -1) {
         // eslint-disable-next-line no-continue
         continue;
       }
 
-      const renderedImagePath = `./staticData/assets/img/${path}/${weapon.objKey}.png`;
+      const renderedImagePath = `./staticData/assets/img/${path}/${name}.png`;
 
       const text = text2png(weapon.name, {
         font: '75px TrueType',

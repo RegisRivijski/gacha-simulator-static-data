@@ -8,7 +8,7 @@ const itemsDataGeneratePromise = util.promisify(itemsData.generate);
 const consoleInfoPromise = util.promisify(console.info);
 
 async function main() {
-  await itemsDataGeneratePromise;
+  await itemsDataGeneratePromise();
   await imagesData.generate();
   await finalGachaImages.generate();
 
