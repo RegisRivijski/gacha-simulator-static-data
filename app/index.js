@@ -4,11 +4,10 @@ const itemsData = require('./processors/itemsData');
 const imagesData = require('./processors/itemsImages');
 const finalGachaImages = require('./processors/finalGachaImages');
 
-const itemsDataGeneratePromise = util.promisify(itemsData.generate);
 const consoleInfoPromise = util.promisify(console.info);
 
 async function main() {
-  await itemsDataGeneratePromise();
+  await itemsData.generate();
   await imagesData.generate();
   await finalGachaImages.generate();
 

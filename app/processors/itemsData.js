@@ -1,8 +1,11 @@
 const config = require('config');
 const fs = require('fs');
 const genshindb = require('genshin-db');
+const util = require('util');
 
 const log = require('../helpers/logHelper');
+
+const fsWriteFile = util.promisify(fs.writeFile);
 
 const LangCodes = config.language;
 
@@ -17,11 +20,11 @@ const weapons = genshindb.weapons('names', {
 });
 
 module.exports = {
-  generate() {
+  async generate() {
     const charactersData = {};
     const weaponsData = {};
     // eslint-disable-next-line guard-for-in
-    for (const code in LangCodes) {
+    for await (const code of Object.keys(LangCodes)) {
       const charactersPath = `./staticData/data/items/${code}/characters.json`;
       const weaponsPath = `./staticData/data/items/${code}/weapons.json`;
 
@@ -49,7 +52,7 @@ module.exports = {
       }
 
       log.writing(charactersPath);
-      fs.writeFileSync(charactersPath, JSON.stringify(charactersData[code], null, 2));
+      await fsWriteFile(charactersPath, JSON.stringify(charactersData[code], null, 2));
 
       for (const name of weapons) {
         const engWeapon = genshindb.weapons(name, {
@@ -68,7 +71,7 @@ module.exports = {
       }
 
       log.writing(weaponsPath);
-      fs.writeFileSync(weaponsPath, JSON.stringify(weaponsData[code], null, 2));
+      await fsWriteFile(weaponsPath, JSON.stringify(weaponsData[code], null, 2));
     }
   },
 };
