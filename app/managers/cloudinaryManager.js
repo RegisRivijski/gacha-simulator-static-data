@@ -4,7 +4,7 @@ const axios = require('axios');
 const cloudinaryOrigin = `${config.rest.images.protocol}//${config.rest.images.host}${config.rest.images.url}`;
 
 module.exports = {
-  getGachaSplash({ namegachasplash }) {
+  getGachaSplash(namegachasplash) {
     return axios
       .get(`${cloudinaryOrigin}${namegachasplash}.png`, {
         responseType: 'arraybuffer',
@@ -12,7 +12,7 @@ module.exports = {
       .then(({ data }) => data);
   },
 
-  getGachaSlice({ namegachaslice }) {
+  getGachaSlice(namegachaslice) {
     return axios
       .get(`${cloudinaryOrigin}${namegachaslice}.png`, {
         responseType: 'arraybuffer',
@@ -20,7 +20,7 @@ module.exports = {
       .then(({ data }) => data);
   },
 
-  getGacha({ namegacha }) {
+  getGacha(namegacha) {
     return axios
       .get(`${cloudinaryOrigin}${namegacha}.png`, {
         responseType: 'arraybuffer',

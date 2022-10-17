@@ -9,7 +9,20 @@ RUN apk --no-cache upgrade && \
 WORKDIR /app
 COPY . .
 
-RUN npm install -g node-gyp && \
-    npm install --only=prod
+RUN apk --no-cache add \
+    sudo \
+    curl \
+    build-base \
+    g++ \
+    libpng \
+    libpng-dev \
+    jpeg-dev \
+    pango-dev \
+    cairo-dev \
+    giflib-dev \
+    python3 \
+    ;
+
+RUN npm install
 
 ENTRYPOINT ["npm", "run", "start"]

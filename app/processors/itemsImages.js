@@ -16,41 +16,48 @@ const weapons = genshindb.weapons('names', {
 
 module.exports = {
   async generate() {
-    const charactersEn = Object.values(characters);
-    const weaponsEn = Object.values(weapons);
-
-    for await (const item of charactersEn) {
+    for await (const item of characters) {
       const splashImagePath = `./staticData/assets/img/items/gachaSplashCharacters/${item.objKey}.png`;
       const sliceImagePath = `./staticData/assets/img/items/gachaSliceCharacters/${item.objKey}.png`;
 
-      const splashImage = await cloudinaryManager.getGachaSplash(item.images)
-        .catch((e) => log.writingError(splashImagePath, e.message));
+      const nameGachaSplash = item?.images?.namegachasplash;
+      const nameGachaSlice = item?.images?.namegachaslice;
 
-      if (splashImage) {
-        log.writing(splashImagePath);
-        fs.writeFileSync(splashImagePath, splashImage, { encoding: 'binary' });
+      if (nameGachaSplash) {
+        const splashImage = await cloudinaryManager.getGachaSplash(nameGachaSplash)
+          .catch((e) => log.writingError(splashImagePath, e.message));
+
+        if (splashImage) {
+          log.writing(splashImagePath);
+          fs.writeFileSync(splashImagePath, splashImage, { encoding: 'binary' });
+        }
       }
 
-      const sliceImage = await cloudinaryManager.getGachaSlice(item.images)
-        .catch((e) => log.writingError(splashImagePath, e.message));
+      if (nameGachaSlice) {
+        const sliceImage = await cloudinaryManager.getGachaSlice(nameGachaSlice)
+          .catch((e) => log.writingError(splashImagePath, e.message));
 
-      if (sliceImage) {
-        log.writing(sliceImagePath);
-        fs.writeFileSync(sliceImagePath, sliceImage, { encoding: 'binary' });
+        if (sliceImage) {
+          log.writing(sliceImagePath);
+          fs.writeFileSync(sliceImagePath, sliceImage, { encoding: 'binary' });
+        }
       }
     }
 
-    for await (const item of weaponsEn) {
+    for await (const item of weapons) {
       const imagePath = `./staticData/assets/img/items/gachaWeapons/${item.objKey}.png`;
 
-      const image = await cloudinaryManager.getGacha(item.images)
-        .catch((e) => log.writingError(imagePath, e.message));
+      const nameGacha = item?.images?.namegacha;
 
-      if (image) {
-        log.writing(imagePath);
-        fs.writeFileSync(imagePath, image, { encoding: 'binary' });
+      if (nameGacha) {
+        const image = await cloudinaryManager.getGacha()
+          .catch((e) => log.writingError(imagePath, e.message));
+
+        if (image) {
+          log.writing(imagePath);
+          fs.writeFileSync(imagePath, image, { encoding: 'binary' });
+        }
       }
     }
-    console.info('Done!');
   },
 };
