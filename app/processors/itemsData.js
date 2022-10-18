@@ -52,7 +52,7 @@ module.exports = {
       }
 
       log.writing(charactersPath);
-      await fsWriteFile(charactersPath, JSON.stringify(charactersData[code], null, 2));
+      await fsWriteFile(charactersPath, JSON.stringify(charactersData[code]));
 
       for (const name of weapons) {
         const engWeapon = genshindb.weapons(name, {
@@ -71,7 +71,7 @@ module.exports = {
       }
 
       log.writing(weaponsPath);
-      await fsWriteFile(weaponsPath, JSON.stringify(weaponsData[code], null, 2));
+      await fsWriteFile(weaponsPath, JSON.stringify(weaponsData[code]));
     }
   },
 };

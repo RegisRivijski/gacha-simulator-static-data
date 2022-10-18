@@ -1,4 +1,4 @@
-const genshindb = require("genshin-db");
+const genshindb = require('genshin-db');
 const packageJson = require('../package.json');
 
 module.exports = {
@@ -24,7 +24,7 @@ module.exports = {
     mongodb: {
       url: process.env.MONGODB_1_HOSTNAME,
       options: {
-        dbName: 'genshinImpactTgBot',
+        dbName: 'genshinImpactStaticData',
         user: process.env.MONGO_INITDB_ROOT_USERNAME,
         pass: process.env.MONGO_INITDB_ROOT_PASSWORD,
         authSource: 'admin',
