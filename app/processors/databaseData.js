@@ -29,7 +29,7 @@ module.exports = {
 
     for await (const item of chancesData) {
       if (item.filename && item.data) {
-        const chancesPath = `${chancesPathToFile}${item.filename}`;
+        const chancesPath = `${chancesPathToFile}${item.filename}.json`;
 
         log.writing(chancesPath);
         await fsWriteFile(chancesPath, JSON.stringify(item.data));
@@ -38,7 +38,7 @@ module.exports = {
 
     for await (const item of pricesData) {
       if (item.filename && item.data) {
-        const pricesPath = `${pricesPathToFile}${item.filename}`;
+        const pricesPath = `${pricesPathToFile}${item.filename}.json`;
 
         log.writing(pricesPath);
         await fsWriteFile(pricesPath, JSON.stringify(item.data));
