@@ -50,7 +50,7 @@ module.exports = {
     }
 
     for await (const item of translatesData) {
-      if (item.filename && item.data) {
+      if (item.code) {
         const translatesPath = `${translatesPathToFile}${item.code}.json`;
 
         log.writing(translatesPath);
