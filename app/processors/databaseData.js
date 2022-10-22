@@ -8,16 +8,20 @@ const fsWriteFile = util.promisify(fs.writeFile);
 const BannersModel = require('../models/banners');
 const ChancesModel = require('../models/chances');
 const PricesModel = require('../models/prices');
+const TranslatesModel = require('../models/translates');
 
 module.exports = {
   async generate() {
     const bannersPath = './staticData/data/banners/banners.json';
+
     const chancesPathToFile = './staticData/data/chances/';
     const pricesPathToFile = './staticData/data/prices/';
+    const translatesPathToFile = './staticData/translates/';
 
     const bannersData = await BannersModel.find({});
     const chancesData = await ChancesModel.find({});
     const pricesData = await PricesModel.find({});
+    const translatesData = await TranslatesModel.find({});
 
     const banners = {};
     for (const item of bannersData) {
@@ -42,6 +46,15 @@ module.exports = {
 
         log.writing(pricesPath);
         await fsWriteFile(pricesPath, JSON.stringify(item.data));
+      }
+    }
+
+    for await (const item of translatesData) {
+      if (item.filename && item.data) {
+        const translatesPath = `${translatesPathToFile}${item.code}.json`;
+
+        log.writing(translatesPath);
+        await fsWriteFile(translatesPath, JSON.stringify(item));
       }
     }
   },
