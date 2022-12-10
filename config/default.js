@@ -16,8 +16,8 @@ module.exports = {
     },
     images: {
       protocol: process.env.GENSHIN_IMAGES_PROTOCOL,
-      host: process.env.GENSHIN_IMAGES_HOST,
-      url: process.env.GENSHIN_IMAGES_URL,
+      host: process.env.API_AMBR_HOST,
+      url: process.env.API_AMBR_GENSHIN_IMAGES_URL,
     },
   },
   db: {
