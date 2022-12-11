@@ -40,7 +40,7 @@ module.exports = {
 
       if (nameGachaSlice) {
         const sliceImage = await cloudinaryManager.getGachaSlice(nameGachaSlice)
-          .catch((e) => log.writingError(splashImagePath, e.message));
+          .catch((e) => log.writingError(sliceImagePath, e.message));
 
         if (sliceImage) {
           log.writing(sliceImagePath);
