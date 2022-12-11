@@ -6,5 +6,6 @@ module.exports = {
 
   BLOCKED_WEAPONS_OBJ_KEYS: [
     '"The Catch"',
+    'Prized Isshin Blade',
   ],
 };
