@@ -9,7 +9,7 @@ RUN apk --no-cache upgrade && \
 WORKDIR /app
 COPY . .
 
-RUN apk --no-cache add \
+RUN apk add \
     sudo \
     curl \
     build-base \
@@ -25,4 +25,6 @@ RUN apk --no-cache add \
 
 RUN npm install
 
-ENTRYPOINT ["npm", "run", "start"]
+RUN chmod +x /app/bin/start.sh
+
+ENTRYPOINT ["/app/bin/start.sh"]
