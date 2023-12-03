@@ -28,7 +28,7 @@ module.exports = {
       const nameGachaSplash = item?.images?.namegachasplash;
       const nameGachaSlice = item?.images?.namegachaslice;
 
-      if (nameGachaSplash) {
+      if (nameGachaSplash && !fs.existsSync(splashImagePath)) {
         const splashImage = await cloudinaryManager.getGachaSplash(nameGachaSplash)
           .catch((e) => log.writingError(splashImagePath, e.message));
 
@@ -38,7 +38,7 @@ module.exports = {
         }
       }
 
-      if (nameGachaSlice) {
+      if (nameGachaSlice && !fs.existsSync(sliceImagePath)) {
         const sliceImage = await cloudinaryManager.getGachaSlice(nameGachaSlice)
           .catch((e) => log.writingError(sliceImagePath, e.message));
 
@@ -59,7 +59,7 @@ module.exports = {
 
       const nameGacha = item?.images?.namegacha;
 
-      if (nameGacha) {
+      if (nameGacha && !fs.existsSync(imagePath)) {
         const image = await cloudinaryManager.getGacha(nameGacha)
           .catch((e) => log.writingError(imagePath, e.message));
 

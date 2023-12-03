@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const text2png = require('text2png');
 const imageSize = require('image-size');
 const sharp = require('sharp');
@@ -39,6 +41,10 @@ module.exports = {
       }
 
       const renderedImagePath = `./staticData/assets/img/${path}/${name}.png`;
+
+      if (fs.existsSync(renderedImagePath)) {
+        continue;
+      }
 
       const text = text2png(character.name.length > 10 ? character.name.replace(' ', '\n') : character.name, {
         font: '75px TrueType',
@@ -154,6 +160,10 @@ module.exports = {
       }
 
       const renderedImagePath = `./staticData/assets/img/${path}/${name}.png`;
+
+      if (fs.existsSync(renderedImagePath)) {
+        continue;
+      }
 
       const text = text2png(weapon.name, {
         font: '75px TrueType',
