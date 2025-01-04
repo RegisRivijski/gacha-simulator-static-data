@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:18.17-alpine
 MAINTAINER "Artur Petrov petrov0397@gmail.com"
 
 RUN apk --no-cache upgrade && \
@@ -9,7 +9,7 @@ RUN apk --no-cache upgrade && \
 WORKDIR /app
 COPY . .
 
-RUN apk add \
+RUN apk add --no-cache \
     sudo \
     curl \
     build-base \
@@ -21,9 +21,13 @@ RUN apk add \
     cairo-dev \
     giflib-dev \
     python3 \
-    ;
+    vips-dev \
+    zlib-dev
 
-RUN npm install
+RUN npm install --unsafe-perm --build-from-source=false
+
+RUN apk del build-base g++ && \
+    rm -rf /var/cache/apk/*
 
 RUN chmod +x /app/bin/start.sh
 

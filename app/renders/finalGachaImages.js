@@ -43,6 +43,7 @@ module.exports = {
       const renderedImagePath = `./staticData/assets/img/${path}/${name}.png`;
 
       if (fs.existsSync(renderedImagePath)) {
+        // eslint-disable-next-line no-continue
         continue;
       }
 
@@ -64,7 +65,7 @@ module.exports = {
       });
 
       let elementIconPath;
-      switch (characterEng.element) {
+      switch (characterEng.elementText) {
         case 'Anemo':
           elementIconPath = 'Element_Anemo.png';
           break;
@@ -162,6 +163,7 @@ module.exports = {
       const renderedImagePath = `./staticData/assets/img/${path}/${name}.png`;
 
       if (fs.existsSync(renderedImagePath)) {
+        // eslint-disable-next-line no-continue
         continue;
       }
 
@@ -182,7 +184,7 @@ module.exports = {
 
       let bgClassPath;
       let iconClassPath;
-      switch (weaponEng.weapontype) {
+      switch (weaponEng.weaponText) {
         case 'Claymore':
           bgClassPath = 'bg-claymore.png';
           iconClassPath = 'Icon_Claymore.png';

@@ -25,8 +25,8 @@ module.exports = {
       const splashImagePath = `./staticData/assets/img/items/gachaSplashCharacters/${item.name}.png`;
       const sliceImagePath = `./staticData/assets/img/items/gachaSliceCharacters/${item.name}.png`;
 
-      const nameGachaSplash = item?.images?.namegachasplash;
-      const nameGachaSlice = item?.images?.namegachaslice;
+      const nameGachaSplash = item?.images?.filename_gachaSplash;
+      const nameGachaSlice = item?.images?.filename_gachaSlice;
 
       if (nameGachaSplash && !fs.existsSync(splashImagePath)) {
         const splashImage = await cloudinaryManager.getGachaSplash(nameGachaSplash)
@@ -57,7 +57,7 @@ module.exports = {
 
       const imagePath = `./staticData/assets/img/items/gachaWeapons/${item.name}.png`;
 
-      const nameGacha = item?.images?.namegacha;
+      const nameGacha = item?.images?.filename_gacha;
 
       if (nameGacha && !fs.existsSync(imagePath)) {
         const image = await cloudinaryManager.getGacha(nameGacha)
